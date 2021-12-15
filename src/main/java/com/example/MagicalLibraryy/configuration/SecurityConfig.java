@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
@@ -26,19 +28,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/shop/**", "/register", "/h2-console/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest()
-                .authenticated()
+                //.anyRequest()
+                //.authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login");
+                .loginPage("/login")
                 //.permitAll()
-            //    .failureUrl("/login?error= true")
-          //      .defaultSuccessUrl("/")
-      //          .usernameParameter("email")
-        //        .passwordParameter("password");
-//                .and()
-//                .oauth2Login()
-//                .loginPage("/login")
+                .failureUrl("/login?error= true")
+                //.defaultSuccessUrl("/")
+                .usernameParameter("email")
+                .passwordParameter("password");
+               // .and()
+             //   .oauth2Login()
+             //   .loginPage("/login");
 //                .successHandler(googleOAuth2SuccessHandler)
 //                .and()
 //                .logout()
@@ -51,7 +53,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and()
 //                .csrf()
 //                .disable();
-//        http.headers().frameOptions().disable();
+     http.headers().frameOptions().disable();
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
 
     }
 
@@ -70,6 +74,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/resources/**", "/static/**", "/images/**", "/Bookimages/**", "/js/**");
         web.ignoring().antMatchers("/resources/**", "/static/**", "/images/**", "/Bookimages/**", "/js/**");
     }
+    @Bean
+    public PasswordEncoder getPasswordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
+
 }
 
 

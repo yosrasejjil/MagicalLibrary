@@ -107,12 +107,12 @@ public class AdminController {
 //            ProductDTO productDTO = new ProductOTOO;
 //            productDTO.setld(product.getldO);
 //            productDTO.setNane(product.getNameO);
-//            productDTO.setCategoryId((product.getCategory().getId()));
+//            productDTO.setGenreId((product.getGenre().getId()));
 //            productDTO.setPrice(product.getPriceO);
 //            productDTO.setweight((product.getWeightO));
 //            productDTO. setOescription (product. getOescriptionO);
 //            productDTO.setImageName(product. getImageNaneO);
-//            model.addAttribute( ttr .	"categories”, categoryService.getAHCategoryO);
+//            model.addAttribute( ttr .	"categories”, GenreService.getAHGenreO);
 //                    model.addAttribute( ttfbjtcNam. “productDTO”, productDTO);
 //            return "productsAdd";
 //
